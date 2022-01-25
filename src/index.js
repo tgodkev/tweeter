@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import RouteSwitch from './components/RouteSwitch';
 import reportWebVitals from './reportWebVitals';
+import { initializeApp } from "firebase/app";
+import {firebaseConfig} from './firebase-config'
+import { getAnalytics } from "firebase/analytics";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+   <RouteSwitch />
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -15,3 +17,8 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+// Initialize Firebase
+
+const app = initializeApp(firebaseConfig);
+
+const analytics = getAnalytics(app);
