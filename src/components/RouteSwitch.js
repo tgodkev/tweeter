@@ -10,13 +10,17 @@ import App from './App';
 
 function RouteSwitch(){
 
-    const[message , setMessage] = useState('');
+    const[message , setMessage] = useState([]);
+
+    
 
     useEffect(() => {
       onSnapshot(collection(db, "messages"), (snapshot) => {
           console.log(snapshot.docs.map((doc) => doc.data()))
       })
   })
+
+
 
 
   function handleChange(e){
@@ -35,11 +39,14 @@ function RouteSwitch(){
 
 
     return(
+      
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<App input={handleChange} text={message} send={saveMessage}  />} />
             </Routes>
         </BrowserRouter>
+    
+      
     )
 }
 

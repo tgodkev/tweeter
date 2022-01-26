@@ -25,6 +25,9 @@ function App(props) {
 
      
       </div>
+        {props.text.map((text) =>(
+        <h1> {message.message}</h1>
+      ))}
     </div>
   );
 }
