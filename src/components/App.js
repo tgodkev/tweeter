@@ -18,12 +18,12 @@ function App(props) {
       </div>
 
     <div>
-      <form action="submit">
+     
         <label htmlFor="input">enter message here.</label>
         <input type="text" onChange={props.input} />
-        <button>Send.</button>
+        <button type='submit' onClick={props.send} >Send.</button>
 
-      </form>
+     
       </div>
     </div>
   );
