@@ -12,10 +12,7 @@ function App(props) {
   return (
     <div>
 
-      <div className='message'>
-      <h1>username.</h1>
-        <h1>{props.text}</h1>
-      </div>
+      
 
     <div>
      
@@ -25,9 +22,12 @@ function App(props) {
 
      
       </div>
-        {props.text.map((text) =>(
-        <h1> {message.message}</h1>
-      ))}
+
+      <div className='message'>
+      <h1>username.</h1>
+        <h1>{props.text}</h1>
+      </div>
+
     </div>
   );
 }
