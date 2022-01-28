@@ -16,18 +16,13 @@ function RouteSwitch(){
 
     const[message , setMessage] = useState([]);
     const[signIn, setSignIn] = useState(false);
-    const[userMessage, setUserMessage] = useState([])
+    
 
-    console.log(message);
+    //console.log(message);
 
-    useEffect(() => {
-      onSnapshot(collection(db, "messages"), (snapshot) => {
-          //console.log(snapshot.docs.map((doc) => doc.data()))
-          //setUserMessage(snapshot.docs.map((doc) => doc.data()))
-      })
-  }, [])
+  
 
-
+ 
 
   
 
@@ -54,7 +49,10 @@ const provider = new GoogleAuthProvider();
             const token = credential?.accessToken;
             // The signed-in user info.
             const user = result.user;
-            console.log({ credential, token, user });
+            //console.log({ credential, token, user });
+        })
+        .then(() => {
+          setSignIn(!signIn);
         })
         .catch((error) => {
             // Handle Errors here.
@@ -64,9 +62,9 @@ const provider = new GoogleAuthProvider();
             const email = error.email;
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
-            console.log({ errorCode, errorMessage, email, credential });
+            //console.log({ errorCode, errorMessage, email, credential });
         });
-        setSignIn(!signIn);
+       
 
 };
 
