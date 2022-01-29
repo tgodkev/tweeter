@@ -10,16 +10,19 @@ function App(props) {
     message: '',
   }])
 
+ 
   useEffect(() => {
-    onSnapshot(collection(db, "messages"), (snapshot) => {
-        //console.log(snapshot.docs.map((doc) => doc.data()))
-        setUserMessage(snapshot.docs.map((doc) => doc.data()))
-        
-    })
-}, [])
+  onSnapshot(collection(db, "messages"), (snapshot) => {
+      console.log(snapshot.docs.map((doc) => doc.data()))
+      setUserMessage(snapshot.docs.map((doc) => doc.data()))
+      
+  })
+    }, [])
 
-  
-const first = userMessage.message;
+ 
+
+console.log(userMessage);
+
   
  
 
@@ -41,7 +44,8 @@ const first = userMessage.message;
 
       <div className='message'>
       <h1>username.</h1>
-  
+
+      
       </div>
 
     </div>
@@ -49,3 +53,7 @@ const first = userMessage.message;
 }
 
 export default App;
+
+
+
+ 
