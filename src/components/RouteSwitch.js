@@ -4,7 +4,7 @@ import React, {  useState } from 'react';
 import db from '../firebase-config'
 import {  collection, addDoc,} from 'firebase/firestore';
 import { auth } from '../firebase-config';
-import { GoogleAuthProvider, signInWithPopup, setPersistence, browserSessionPersistence, onAuthStateChanged,} from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged,} from 'firebase/auth';
 
 
 import App from './App';
@@ -15,7 +15,7 @@ function RouteSwitch(){
 
     const[message , setMessage] = useState([]);
     const[signIn, setSignIn] = useState(false);
-    
+   
   
     
 
@@ -30,15 +30,25 @@ function RouteSwitch(){
 const provider = new GoogleAuthProvider();
 
    const  login = () => {
-    auth.onAuthStateChanged((user) => {
-      signInWithPopup(auth, provider).then(() => {
-        setSignIn(!signIn);
-        
-      })
-    });
+    signInWithPopup(auth, provider)
 
 };
 
+onAuthStateChanged(auth, (user) => {
+  if (user.emailVerified === true) {
+    // User is signed in, see docs for a list of available properties
+    setSignIn(true);
+
+  
+    //const uid = user.uid;
+
+    //console.log(user);
+    // ...
+  } else {
+    // User is signed out
+    signInWithPopup(auth, provider)
+  }
+});
 
 
 
@@ -48,6 +58,7 @@ const provider = new GoogleAuthProvider();
 const logout = () => {
     auth.signOut();
     console.log("logout");
+    setSignIn(false);
 };
  
   
@@ -62,7 +73,7 @@ async function saveMessage() {
       
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Login login={login} logout={logout} enter={signIn} />} />
+                <Route path='/' element={<Login login={login} logout={logout} enter={signIn}  />} />
                 <Route path='/app' element={<App input={handleChange} text={message} send={saveMessage}  />} />
                 
             </Routes>
@@ -81,28 +92,3 @@ export default RouteSwitch
 
 
 
-{/* signInWithPopup(auth, provider)
-        .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential?.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            //console.log({ credentials, token,  user });
-            setPersistence()
-            
-        })
-        .then(() => {
-          setSignIn(!signIn);
-          
-        })
-        .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            //console.log({ errorCode, errorMessage, email, credential });
-        });*/}
