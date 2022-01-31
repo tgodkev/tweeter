@@ -46,6 +46,7 @@ onAuthStateChanged(auth, (user) => {
     // ...
   } else {
     // User is signed out
+    setSignIn(false);
     signInWithPopup(auth, provider)
   }
 });

@@ -5,7 +5,6 @@ import { collection,  onSnapshot} from 'firebase/firestore';
 import NewCard from './Card'
 
 
-
 function App(props) {
 
   const[userMessage, setUserMessage] = useState([{

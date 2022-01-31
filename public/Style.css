@@ -1,7 +1,7 @@
 body{
     margin: 0px;
     padding: 0px;
-    background-color: aqua;
+    background-color: #261447;
 }
 
 
@@ -18,7 +18,7 @@ body{
 
 
 .input{
-    margin-left: 40%;
+    margin-left: 43%;
 }
 
 .textField{
@@ -26,15 +26,28 @@ body{
 }
 
 .username{
-    margin-left: 40%;
+    margin-left: 45%;
+    color: #dbd8f0;
 
+}.username h1{
+    margin-left: 3%;
 }
 
 .username img{
     border-radius: 50%;
+    margin-left: 5%;
 }
 
 .login{
-    margin-left: 40%;
+    margin-left: 43%;
     margin-top: 10%;
+    color: #dbd8f0;
+}
+
+.login button{
+    margin: 5px;
+}
+
+.enter{
+    margin-left: 44%;
 }

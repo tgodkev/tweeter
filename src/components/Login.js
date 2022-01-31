@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import UnstyledButtonCustom from './Button';
+import Button from '@mui/material/Button';
 
 
 function login(props){
@@ -11,12 +12,18 @@ function login(props){
 
 
     return(
+
+        <div>
         <div className="login">
             <h1>Sign in to enter</h1>
-             <button onClick={props.login}>Login</button>
-            <button onClick={props.logout}>Logout.</button>
-             {props.enter && <Link to='/app'><Button >Enter</Button></Link>}
+             <Button variant='contained' onClick={props.login}>Login</Button>
+            <Button variant='contained' onClick={props.logout}>Logout.</Button>
             
+        </div>
+
+        <div className="enter">
+        {props.enter && <Link to='/app'><UnstyledButtonCustom /> </Link>}
+        </div>
         </div>
     )
 }
