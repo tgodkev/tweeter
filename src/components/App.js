@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import db from '../firebase-config'
 import { auth } from '../firebase-config';
-import { collection,  onSnapshot} from 'firebase/firestore';
+import { collection,  onSnapshot, serverTimestamp, orderBy, Timestamp, limit, query, getFirestore} from 'firebase/firestore';
 import NewCard from './Card'
 
 
@@ -9,18 +9,25 @@ function App(props) {
 
   const[userMessage, setUserMessage] = useState([{
     message: '',
+    userName: '',
+    photo: '',
   }])
 
  
-  useEffect(() => {
-  onSnapshot(collection(db, "messages"), (snapshot) => {
-      //console.log(snapshot.docs.map((doc) => doc.data()))
-      setUserMessage(snapshot.docs.map((doc) => doc.data()))
+ 
+
+    useEffect(() => {
+      const recentMessageQuery = query(collection(getFirestore(),'messages'), orderBy('timestamp', 'desc'), limit(12));
+    
+      onSnapshot(recentMessageQuery, (snapshot) => {
+        const data = snapshot.docs.map((doc) => doc.data())
+        setUserMessage(data);
+      })
+
+    
       
-  })
     }, [])
-
-
+    
     
 
  
@@ -75,3 +82,10 @@ export default App;
 
 
  
+//useEffect(() => {
+  //onSnapshot(collection(db, "messages"), (snapshot) => {
+      //console.log(snapshot.docs.map((doc) => doc.data()))
+      //setUserMessage(snapshot.docs.map((doc) => doc.data()))
+      
+  //})
+    //}, [])

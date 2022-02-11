@@ -2,13 +2,14 @@ import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import React, {  useState } from 'react';
 
 import db from '../firebase-config'
-import {  collection, addDoc,} from 'firebase/firestore';
+import {  collection, addDoc, serverTimestamp,} from 'firebase/firestore';
 import { auth } from '../firebase-config';
 import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged,} from 'firebase/auth';
 
 
 import App from './App';
 import Login from './Login';
+import Profile from './Profile';
 
 
 function RouteSwitch(){
@@ -65,7 +66,7 @@ const logout = () => {
   
 async function saveMessage() {
   const collectionRef = collection(db, "messages");
-  const payload = {message : message, userName: auth.currentUser.displayName}
+  const payload = {message : message, userName: auth.currentUser.displayName, photo: auth.currentUser.photoURL, timestamp: serverTimestamp()}
   await addDoc(collectionRef, payload);
 }
 
@@ -76,6 +77,7 @@ async function saveMessage() {
             <Routes>
                 <Route path='/' element={<Login login={login} logout={logout} enter={signIn}  />} />
                 <Route path='/app' element={<App input={handleChange} text={message} send={saveMessage}  />} />
+                <Route path='/profile' element={<Profile />} />
                 
             </Routes>
         </BrowserRouter>
