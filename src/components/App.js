@@ -4,7 +4,7 @@ import { auth } from '../firebase-config';
 import { Link } from 'react-router-dom';
 import { collection,  onSnapshot, serverTimestamp, orderBy, Timestamp, limit, query, getFirestore} from 'firebase/firestore';
 import NewCard from './Card'
-import Profile from './Profile';
+
 
 
 function App(props) {
@@ -48,13 +48,9 @@ function App(props) {
 
   const name = auth.currentUser.displayName;
   const pic = auth.currentUser.photoURL;
-  console.log(pic);
+ 
 
-  <Profile 
-    message={userMessage.message}
-    name={name}
-  />
-
+  
   return (
     <div>
 

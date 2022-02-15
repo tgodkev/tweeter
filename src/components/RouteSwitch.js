@@ -66,7 +66,7 @@ const logout = () => {
   
 async function saveMessage() {
   const collectionRef = collection(db, "messages");
-  const payload = {message : message, userName: auth.currentUser.displayName, photo: auth.currentUser.photoURL, timestamp: serverTimestamp()}
+  const payload = {message : message, userName: auth.currentUser.displayName, photo: auth.currentUser.photoURL, timestamp: serverTimestamp(), uid: auth.currentUser.uid}
   await addDoc(collectionRef, payload);
 }
 
